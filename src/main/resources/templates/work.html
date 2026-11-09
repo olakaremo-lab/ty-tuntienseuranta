@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <Title>Work hours</Title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body class="workpage">
+    <div class="work-container">   
+        <div class="work-header">
+            <form th:action="@{/logout}" method="post">
+                    <button type="submit" id="Takaisin">
+                    Kirjaudu ulos
+                    </button>
+            </form>
+            <h1>Lisää työtunnit alta:</h1>
+
+        </div>
+        <form class="work-form"  th:action="@{/work/save}" th:object="${work}" method="post">
+            <h3>Työtehtävät</h3>
+        
+            <label>Työtehtävä</label> 
+            <input type="text" th:field="*{task}">
+        
+            <label>Päivämäärä:</label>    
+            <input type="date" th:field="*{date}">
+
+            <label>Aloitusaika:</label>
+            <input type="time" th:field="*{beginning}">
+
+            <label>Lopetusaika:</label>
+            <input type="time" th:field="*{end}">
+
+            <label>Tauko (min):</label>
+            <input type="number" th:field="*{breaktime}" min="0">
+
+            <button type="submit">Tallenna  </button>
+        </form>
+
+        <h2>Aiemmat työtunnit:</h2>
+        <table class="work-table">
+            <tr>
+                <th>Työtehtävä</th>
+                <th>Päivämäärä</th>
+                <th>Aloitusaika</th>
+                <th>Lopetusaika</th>
+                <th>Tauko (min)</th>
+                <th>Poisto</th>
+                <th>Muokkaa</th>
+            </tr>
+            <tr th:each="work:${works}">
+                <td th:text="${work.task}"></td>
+                <td th:text="${work.date}"></td>
+                <td th:text="${work.beginning}"></td>
+                <td th:text="${work.end}"></td>
+                <td th:text="${work.breaktime}"></td>
+                <td>
+                    <form th:action= "@{/work/delete/{id}(id=${work.id})}" method="post">
+                        <button type="submit" sec:authorize="hasRole('ADMIN')">Poista</button>                    
+                    </form>
+                </td>
+                <td>
+                    <a th:href="@{/work/edit/{id}(id=${work.id})}">
+                        <button sec:authorize="hasRole('ADMIN')">Muokkaa</button>
+                    </a>
+                </td>
+            </tr>
+        </table>  
+    </div>  
+</body>
+</html>

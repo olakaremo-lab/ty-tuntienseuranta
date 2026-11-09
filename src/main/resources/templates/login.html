@@ -1,0 +1,24 @@
+    <!DOCTYPE html>
+    <html xmlns:th="http://www.thymeleaf.org"></html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="stylesheet" th:href="@{/style.css}">
+        
+    </head>
+    <body class="login-page">
+        <div class="login-box">
+            <h1>Työtuntiseuranta</h1>
+            <h2>Login</h2>
+            
+            <form th:action="@{/login}" method="post">
+                
+                <label> User Name : <input type="text" name="username"/> </label>
+
+                <label> Password: <input type="password" name="password"/> </label>
+                
+                <button type="submit">Kirjaudu sisään</button>
+                <a:></a>
+            </form>
+        </div>
+    </body>
+    </html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body class="work-page">
+    <div class="work-container">
+        <h1>Muokkaus</h1>
+        <form class="work-form" th:action="@{/work/save}" th:object="${work}" th:method="post">
+            <input type= "hidden" th:field="*{id}">
+            
+            <label>Työtehtävä</label> 
+            <input type="text" th:field="*{task}">
+        
+            <label>Päivämäärä:</label>    
+            <input type="date" th:field="*{date}">
+
+            <label>Aloitusaika:</label>
+            <input type="time" th:field="*{beginning}">
+
+            <label>Lopetusaika:</label>
+            <input type="time" th:field="*{end}">
+
+            <label>Tauko:</label>
+            <input type="number" th:field="*{breaktime}">
+
+            <button type="submit">Tallenna </button>
+        </form>
+    </div>
+</body>
+</html>

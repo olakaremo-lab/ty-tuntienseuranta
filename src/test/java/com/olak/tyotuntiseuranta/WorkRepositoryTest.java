@@ -8,8 +8,11 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.data.jpa.test.autoconfigure.DataJpaTest;
 import org.springframework.boot.jdbc.test.autoconfigure.AutoConfigureTestDatabase;
-
+import org.springframework.boot.test.context.TestConfiguration;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.olak.tyotuntiseuranta.web.WebSecurityConfig;
 import com.olak.tyotuntiseuranta.web.domain.User;
@@ -19,13 +22,22 @@ import com.olak.tyotuntiseuranta.web.domain.WorkRepository;
 import static org.assertj.core.api.Assertions.assertThat;
 @DataJpaTest 
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-@Import(WebSecurityConfig.class)
+
 public class WorkRepositoryTest {
     @Autowired 
     private WorkRepository workRepository;
 
     @Autowired
     private UserRepository userRepository;
+
+    @TestConfiguration
+    static class TestConfig {
+
+        @Bean
+        PasswordEncoder passwordEncoder() {
+            return new BCryptPasswordEncoder();
+        }
+    }
     
 
     @Test 

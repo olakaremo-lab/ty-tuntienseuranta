@@ -26,11 +26,6 @@ public class WorkController {
         return "login";
     }
 
-    @GetMapping("/index")
-    public String index(){
-        return "index";
-    }
-
     @GetMapping("/work")
     public String showWork(Model model){
         model.addAttribute("work", new Work());

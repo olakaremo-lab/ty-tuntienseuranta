@@ -6,6 +6,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
 import org.springframework.test.web.servlet.MockMvc;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
 
@@ -18,18 +19,18 @@ public class WebLayerTest {
     @Test 
     public void TestEditPage() throws Exception{
         this.mockMvc.perform(get("/work/edit/1"))
-            .andDo(org.springframework.test.web.servlet.result.MockMvcResultHandlers.print());
+            .andExpect(status().isOk());
     }
 
     @Test 
     public void TestMainPage() throws Exception{
         this.mockMvc.perform(get("/work"))
-            .andDo(org.springframework.test.web.servlet.result.MockMvcResultHandlers.print());
+            .andExpect(status().isOk());
     }
 
     @Test 
     public void TestApi() throws Exception{
        this.mockMvc.perform(get("/api/work"))
-        .andDo(org.springframework.test.web.servlet.result.MockMvcResultHandlers.print());  
+            .andExpect(status().isOk());  
     }   
 }
